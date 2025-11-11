@@ -6,6 +6,7 @@ import 'src/providers/providers.dart';
 import 'src/colors/app_theme.dart';
 import 'src/services/supabase_service.dart';
 import 'src/viewmodels/auth_viewmodel.dart';
+import 'src/constants/app_constants.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
           final authViewModel = Provider.of<AuthViewModel>(context);
           final appRouter = AppRouter(authViewModel).router;
           return MaterialApp.router(
-            title: 'Flutter MVVM Starter',
+            title: AppConstants.appName,
             theme: AppTheme.lightTheme,
             routerConfig: appRouter,
             debugShowCheckedModeBanner: false,
