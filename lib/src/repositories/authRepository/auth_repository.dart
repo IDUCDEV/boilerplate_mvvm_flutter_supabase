@@ -1,11 +1,12 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'auth_repository_interface.dart';
 
-
-class AuthRepository {
+class AuthRepository implements IAuthRepository {
   final SupabaseClient supabase;
 
   AuthRepository({required this.supabase});
 
+  @override
   Future<bool> login(String email, String password) async {
     try {
       await supabase.auth.signInWithPassword(
@@ -17,10 +18,11 @@ class AuthRepository {
       return false;
     }
   }
-
+  @override
   Future<void> logout() async {
     await supabase.auth.signOut();
   }
-
+  
+  @override
   bool get isLoggedIn => supabase.auth.currentUser != null;
 }
