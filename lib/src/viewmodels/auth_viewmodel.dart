@@ -3,11 +3,13 @@ import '../repositories/authRepository/auth_repository_interface.dart';
 
 class AuthViewModel extends ChangeNotifier {
   final IAuthRepository authRepository;
+  AuthViewModel({required this.authRepository});
 
   bool isLoading = false;
   String? errorMessage;
+  bool get isAuthenticated => authRepository.isLoggedIn;
 
-  AuthViewModel({required this.authRepository});
+  
 
   Future<bool> login(String email, String password) async {
     isLoading = true;
@@ -31,5 +33,5 @@ class AuthViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool get isAuthenticated => authRepository.isLoggedIn;
+  
 }
