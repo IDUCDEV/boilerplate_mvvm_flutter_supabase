@@ -1,3 +1,4 @@
+import 'package:boilerplate_mvvm_app/src/config/app_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +12,15 @@ import 'src/constants/app_constants.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
-  await SupabaseService.initialize();
+
+  switch (AppConfig.backend) {
+    case BackendType.supabase:
+      await SupabaseService.initializeSupabase();
+      break;
+    case BackendType.restApi:
+      // No initialization needed for REST API
+      break;
+  }
 
   runApp(const MyApp());
 }
